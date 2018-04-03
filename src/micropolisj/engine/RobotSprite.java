@@ -62,6 +62,11 @@ public class RobotSprite extends Sprite
 
 		this.count = 1000;
 		CityLocation p = city.getLocationOfMaxPollution();
+		// Replace the above one with powerplant destination.
+		// Use powerScan() in Micropolis.java to get a list of power stations.
+		// Among the list of powerstations, pick a nuclear first. if there is not, randomly select one.
+		
+		
 		this.destX = p.x * 16 + 8;
 		this.destY = p.y * 16 + 8;
 		this.flag = false;
