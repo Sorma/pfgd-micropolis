@@ -600,6 +600,18 @@ public class MainWindow extends JFrame
 			}
 			}));
 		disastersMenu.add(menuItem);
+		
+		menuItem = new JMenuItem(strings.getString("menu.disasters.ROBOT"));
+		setupKeys(menuItem, "menu.disasters.ROBOT");
+		menuItem.addActionListener(wrapActionListener(
+			new ActionListener() {
+			public void actionPerformed(ActionEvent ev)
+			{
+				onInvokeDisasterClicked(Disaster.ROBOT);
+			}
+			}));
+		disastersMenu.add(menuItem);
+
 
 		menuItem = new JMenuItem(strings.getString("menu.disasters.FIRE"));
 		setupKeys(menuItem, "menu.disasters.FIRE");
@@ -1531,6 +1543,10 @@ public class MainWindow extends JFrame
 		case MONSTER:
 			getEngine().makeMonster();
 			break;
+		case ROBOT:
+			getEngine().makeRobot();
+			break;
+
 		case MELTDOWN:
 			if (!getEngine().makeMeltdown()) {
 				messagesPane.appendCityMessage(MicropolisMessage.NO_NUCLEAR_PLANTS);

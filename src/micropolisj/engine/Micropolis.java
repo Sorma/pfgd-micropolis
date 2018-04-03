@@ -12,6 +12,7 @@ import java.io.*;
 import java.util.*;
 
 import static micropolisj.engine.TileConstants.*;
+import java.util.Random;
 
 /**
  * The main simulation engine for Micropolis.
@@ -915,7 +916,11 @@ public class Micropolis
 		case 7:
 		case 8:
 			if (pollutionAverage > 60) {
-				makeMonster();
+			    Random rand = new Random();
+			    double value = rand.nextDouble();
+				if (value > 0.01) {makeRobot();}
+				else {makeMonster();}
+				
 			}
 			break;
 		}
@@ -2350,6 +2355,43 @@ public class Micropolis
 		assert !hasSprite(SpriteKind.GOD);
 		sprites.add(new MonsterSprite(this, xpos, ypos));
 	}
+	
+	public void makeRobot()
+	{
+		RobotSprite monster = (RobotSprite) getSprite(SpriteKind.GOD);
+		if (monster != null) {
+			// already have a monster in town
+			monster.soundCount = 1;
+			monster.count = 1000;
+			monster.flag = false;
+			monster.destX = pollutionMaxLocationX;
+			monster.destY = pollutionMaxLocationY;
+			return;
+		}
+
+		// try to find a suitable starting spot for monster
+
+		for (int i = 0; i < 300; i++) {
+			int x = PRNG.nextInt(getWidth() - 19) + 10;
+			int y = PRNG.nextInt(getHeight() - 9) + 5;
+			int t = getTile(x, y);
+			if (t == RIVER) {
+				makeRobotAt(x, y);
+				return;
+			}
+		}
+
+		// no "nice" location found, just start in center of map then
+		makeMonsterAt(getWidth()/2, getHeight()/2);
+	}
+
+	void makeRobotAt(int xpos, int ypos)
+	{
+		sendMessage(MicropolisMessage.ROBOT_REPORT);
+		assert !hasSprite(SpriteKind.GOD);
+		sprites.add(new RobotSprite(this, xpos, ypos));
+	}
+
 
 	public void makeTornado()
 	{

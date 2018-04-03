@@ -14,6 +14,7 @@ package micropolisj.engine;
 public enum Disaster
 {
 	MONSTER,
+	ROBOT,
 	FIRE,
 	FLOOD,
 	MELTDOWN,

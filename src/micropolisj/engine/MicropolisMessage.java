@@ -35,6 +35,7 @@ public enum MicropolisMessage
 	POLICE_NEED_FUNDING,   //  19            doMessages
 	FIRE_REPORT,           //  20
 	MONSTER_REPORT,
+	ROBOT_REPORT,
 	TORNADO_REPORT,
 	EARTHQUAKE_REPORT,     //  23            makeEarthquake
 	PLANECRASH_REPORT,
