@@ -11,7 +11,7 @@ package micropolisj.engine;
 import static micropolisj.engine.TileConstants.*;
 
 /**
- * Implements a monster (one of the Micropolis disasters).
+ * Implements an Evil Robot (one of the Micropolis disasters).
  */
 public class RobotSprite extends Sprite
 {
@@ -45,7 +45,7 @@ public class RobotSprite extends Sprite
 
 	public RobotSprite(Micropolis engine, int xpos, int ypos)
 	{
-		super(engine, SpriteKind.GOD);
+		super(engine, SpriteKind.ROB);
 		this.x = xpos * 16 + 8;
 		this.y = ypos * 16 + 8;
 		this.width = 48;
@@ -66,7 +66,7 @@ public class RobotSprite extends Sprite
 		if (!city.powerPlants.isEmpty()) {
 			// Use powerScan() in Micropolis.java to get a list of power stations.
 			// Among the list of power stations, pick a nuclear first. if there is not, randomly select one.
-			if (city.nuclearCount > 0) {
+			if (city.nuclearCount != 0) {
 				p = city.nuclearPowerPlants.peek();
 			}
 			else {
