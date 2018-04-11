@@ -61,11 +61,21 @@ public class RobotSprite extends Sprite
 			(ypos > city.getHeight() / 2 ? 1 : 4);
 
 		this.count = 1000;
-		CityLocation p = city.getLocationOfMaxPollution();
-		// Replace the above one with powerplant destination.
-		// Use powerScan() in Micropolis.java to get a list of power stations.
-		// Among the list of powerstations, pick a nuclear first. if there is not, randomly select one.
+		CityLocation p;
 		
+		if (!city.powerPlants.isEmpty()) {
+			// Use powerScan() in Micropolis.java to get a list of power stations.
+			// Among the list of power stations, pick a nuclear first. if there is not, randomly select one.
+			if (city.nuclearCount > 0) {
+				p = city.nuclearPowerPlants.peek();
+			}
+			else {
+				p = city.powerPlants.peek();
+			}			
+		}
+		else {
+			p = city.getLocationOfMaxPollution();
+		}
 		
 		this.destX = p.x * 16 + 8;
 		this.destY = p.y * 16 + 8;
@@ -167,9 +177,9 @@ public class RobotSprite extends Sprite
 
 		int c = getChar(x, y);
 		if (c == -1 ||
-			(c == RIVER && this.count != 0 && false)
-			) {
-			this.frame = 0; //kill zilla
+			((c == POWERPLANT || c == NUCLEAR)))
+			 {
+			this.frame = 0; //kill robot when it comes into contact with a power plant.
 		}
 
 		for (Sprite s : city.allSprites())

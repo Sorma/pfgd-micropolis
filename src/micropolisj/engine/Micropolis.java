@@ -1167,7 +1167,7 @@ public class Micropolis
 						int tile = getTile(mx, my);
 						if (tile != DIRT)
 						{
-							if (tile < RUBBLE) //natural land features
+							if (tile <= RUBBLE) //natural land features
 							{
 								//inc terrainMem
 								qtem[y/2][x/2] += 15;
@@ -1588,6 +1588,7 @@ public class Micropolis
 	}
 
 	Stack<CityLocation> powerPlants = new Stack<CityLocation>();
+	Stack<CityLocation> nuclearPowerPlants = new Stack<CityLocation>();
 
 	// counts the population in a certain type of residential zone
 	int doFreePop(int xpos, int ypos)
@@ -2108,6 +2109,7 @@ public class Micropolis
 				if (tile == NUCLEAR) {
 					nuclearCount++;
 					powerPlants.add(new CityLocation(x,y));
+					nuclearPowerPlants.add(new CityLocation(x,y));
 				}
 				else if (tile == POWERPLANT) {
 					coalCount++;
