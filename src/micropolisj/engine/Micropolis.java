@@ -918,7 +918,7 @@ public class Micropolis
 			if (pollutionAverage > 60) {
 			    Random rand = new Random();
 			    double value = rand.nextDouble();
-				if (value > 0.01) {makeRobot();}
+				if (value > 0.5) {makeRobot();}
 				else {makeMonster();}
 				
 			}
@@ -2360,7 +2360,7 @@ public class Micropolis
 	
 	public void makeRobot()
 	{
-		RobotSprite monster = (RobotSprite) getSprite(SpriteKind.GOD);
+		RobotSprite monster = (RobotSprite) getSprite(SpriteKind.ROB);
 		if (monster != null) {
 			// already have a monster in town
 			monster.soundCount = 1;
@@ -2390,7 +2390,7 @@ public class Micropolis
 	void makeRobotAt(int xpos, int ypos)
 	{
 		sendMessage(MicropolisMessage.ROBOT_REPORT);
-		assert !hasSprite(SpriteKind.GOD);
+		assert !hasSprite(SpriteKind.ROB);
 		sprites.add(new RobotSprite(this, xpos, ypos));
 	}
 
